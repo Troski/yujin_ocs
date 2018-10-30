@@ -19,7 +19,7 @@
 
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
-
+#include <ackermann_msgs/AckermannDriveStamped.h>
 #include <yaml-cpp/yaml.h>
 
 #ifdef HAVE_NEW_YAMLCPP

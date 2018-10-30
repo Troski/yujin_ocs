@@ -63,7 +63,7 @@ private:
   double common_timer_period;        /**< No messages from any subscriber timeout period */
 
   void timerCallback(const ros::TimerEvent& event, unsigned int idx);
-  void cmdVelCallback(const geometry_msgs::Twist::ConstPtr& msg, unsigned int idx);
+  void cmdVelCallback(const ackermann_msgs::AckermannDriveStamped::ConstPtr& msg, unsigned int idx);
 
   /*********************
   ** Dynamic Reconfigure
@@ -88,7 +88,7 @@ private:
     {
     }
 
-    void operator()(const geometry_msgs::Twist::ConstPtr& msg)
+    void operator()(const ackermann_msgs::AckermannDriveStamped::ConstPtr& msg)
     {
       node->cmdVelCallback(msg, idx);
     }

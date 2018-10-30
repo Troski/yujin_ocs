@@ -27,7 +27,7 @@ namespace yocs_cmd_vel_mux {
  ** Implementation
  *****************************************************************************/
 
-void CmdVelMuxNodelet::cmdVelCallback(const geometry_msgs::Twist::ConstPtr& msg, unsigned int idx)
+void CmdVelMuxNodelet::cmdVelCallback(const ackermann_msgs::AckermannDriveStamped::ConstPtr& msg, unsigned int idx)
 {
   // Reset general timer
   common_timer.stop();
@@ -173,7 +173,7 @@ void CmdVelMuxNodelet::reloadConfiguration(yocs_cmd_vel_mux::reloadConfig &confi
   if (output_topic_name != output_name)
   {
     output_topic_name = output_name;
-    output_topic_pub = pnh.advertise<geometry_msgs::Twist>(output_topic_name, 10);
+    output_topic_pub = pnh.advertise<ackermann_msgs::AckermannDriveStamped>(output_topic_name, 10);
     NODELET_DEBUG_STREAM("CmdVelMux : subscribe to output topic '" << output_name << "'");
   }
   else
@@ -204,7 +204,7 @@ void CmdVelMuxNodelet::reloadConfiguration(yocs_cmd_vel_mux::reloadConfig &confi
     if (!cmd_vel_subs[i]->subs)
     {
       cmd_vel_subs[i]->subs =
-          pnh.subscribe<geometry_msgs::Twist>(cmd_vel_subs[i]->topic, 10, CmdVelFunctor(i, this));
+          pnh.subscribe<ackermann_msgs::AckermannDriveStamped>(cmd_vel_subs[i]->topic, 10, CmdVelFunctor(i, this));
       NODELET_DEBUG("CmdVelMux : subscribed to '%s' on topic '%s'. pr: %d, to: %.2f",
                     cmd_vel_subs[i]->name.c_str(), cmd_vel_subs[i]->topic.c_str(),
                     cmd_vel_subs[i]->priority, cmd_vel_subs[i]->timeout);
